@@ -28,7 +28,6 @@ def plot(Potential_grid, grid_parameters, plot_type='2D'):
 
     elif plot_type == '3D':
         fig = plt.figure()
-        
         plt.plot_surface(np.arange(0, 2*L), np.arange(0, 2*L), Potential_grid, cmap='inferno')
         plt.show()
 

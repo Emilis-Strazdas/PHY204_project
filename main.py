@@ -32,22 +32,25 @@ from time_function import time_function
 
 def main_efficient():
     # Define grid parameters:
-    L = 100
+    L = 10
     # Define iteration parameters ('max_iterations' is optional):
     tolerance = 1e-5
 
     # Compile half of the grid
     # Square_grid, Diagonal_grid = build(grid_parameters, iteration_parameters)
 
-    print(f'Without numba: {time_function(lambda: build(L, tolerance))}')
+    print(f'With numba: {time_function(lambda: build(L, tolerance))}')
+
+    Square_grid, Diagonal_grid = build(L, tolerance)
 
     # Plot the results
-    # plot_finished(Square_grid, Diagonal_grid, grid_parameters, plot_type='3D')
+    plot_finished(Square_grid, Diagonal_grid, L, plot_type='3D')
 
 def build(L, tolerance):
     Square_grid, Diagonal_grid = initialise_efficient(L)
     Square_grid, Diagonal_grid = iteration_efficient(Square_grid, Diagonal_grid, L, tolerance)
-    return construct(Square_grid, Diagonal_grid)
+    # return construct(Square_grid, Diagonal_grid)
+    return Square_grid, Diagonal_grid
 # -------------------------- #
 
 if __name__ == "__main__":

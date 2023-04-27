@@ -1,16 +1,12 @@
-"""
-This file contains the iteration_step function, which performs one iteration
-step.
-"""
-
-# ---------- Imports ---------- #
+from numba.pycc import CC
 import numpy as np
-from numba import njit
 
-# ---------- Iteration Step ---------- #
+cc = CC('my_module')
+# Uncomment the following line to print out the compilation steps
+#cc.verbose = True
 
-# Using Numba to compile the function for faster execution
-@njit
+@cc.export('iteration_step_efficientf', 'np.ndarray(np.ndarray, np.ndarray)')
+
 def iteration_step_efficient(Square_grid, Diagonal_grid, L):
     """
     Performs one iteration step.
@@ -28,7 +24,7 @@ def iteration_step_efficient(Square_grid, Diagonal_grid, L):
     # Initialise the new potential grid
     Square_grid_new = np.copy(Square_grid)
     Diagonal_grid_new = np.copy(Diagonal_grid)
-    
+
     # Update the square part
     for i in range(1, L-1):
         for j in range(L-2, 0, -1):
@@ -50,4 +46,7 @@ def iteration_step_efficient(Square_grid, Diagonal_grid, L):
     for i in range(1, L-1):
             Diagonal_grid_new[i, L-1-i] = (Diagonal_grid[i-1, L-1-i] + Diagonal_grid[i, L-2-i]) * 0.5
 
-    return Square_grid_new, Diagonal_grid_new
+    if Square_grid_new.shape[0] > 0 and Diagonal_grid_new.shape[0]> 0:
+        return np.concatenate((Square_grid_new.flatten(), Diagonal_grid_new.flatten()))
+    else:
+        raise ValueError("Input arrays should have at least one element.")

@@ -12,11 +12,13 @@ def iteration_step_efficient(Square_grid, Diagonal_grid, grid_parameters):
     Performs one iteration step.
     
     Args:
-        Potential_grid (numpy.ndarray): The potential grid.
+        Square_grid (numpy.ndarray): The square part of the potential grid.
+        Diagonal_grid (numpy.ndarray): The diagonal part of the potential grid.
         grid_parameters (dict): A dictionary containing the grid parameters.
         
     Returns:
-        Potential_grid_new (numpy.ndarray): The updated potential grid.
+        Potential_grid_new (numpy.ndarray): The updated Square_grid grid.
+        Diagonal_grid_new (numpy.ndarray): The updated Diagonal_grid grid.
     """
 
     # Get the size of the grid

@@ -60,7 +60,10 @@ def plot_finished(Square_grid, Diagonal_grid, grid_parameters, plot_type='2D'):
         plt.imshow(Potential_grid, cmap='inferno')
         plt.show()
     elif plot_type == '3D':
+        X = np.linspace(0, 2*L, 2*L)
+        Y = np.linspace(0, 2*L, 2*L)
+        X, Y = np.meshgrid(X, Y)
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        ax.plot_surface(np.arange(0, 2*L, 2*L), np.arange(0, 2*L, 2*L), Potential_grid)
+        ax.plot_surface(X, Y, Potential_grid, cmap='inferno')
         plt.show()

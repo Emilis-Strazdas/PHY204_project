@@ -6,50 +6,56 @@
 
 """
     This code is used to solve the Laplace equation with fixed boundary
-    conditions using the Jacobi method. The code is split into three files:
-    initialise.py, iteration.py and iteration_step.py. The initialise.py
-    file contains the function that initialises the grid and the boundary
-    conditions. The iteration.py file contains the function that iterates
-    over the grid until the error is below a certain tolerance. The
-    iteration_step.py file contains the function that performs one iteration
-    step. The main.py file contains the main function that runs the code.
-    
-    TODO:
-        * Add comments.
-        * Add docstrings to the import functions.
+    conditions using the Jacobi method. For performance reasons, we can
+    exploit the fact that the potential grid is symmetric about the anti-
+    diagonal. This allows us to store only half of the grid, which reduces
+    the memory usage and the number of operations by a factor of 2. Furthermore,
+    we precompile the code using the Numba package, which allows us to use
+    just-in-time compilation to speed up the code for testing (this should
+    not be against the rules since C++ programs are also precompiled before
+    being executed.
 """
 
 # ---------- Imports ---------- #
-from initialise import initialise
-from iteration import iteration
 from plot import plot
-import numpy as np
-import matplotlib.pyplot as plt
+from time_function import time_function
+from build import build
 
 # ---------- Main ---------- #
-
 def main():
+    """
+    Plots the potential grid for a given L.
+    """
     # Define grid parameters:
-    grid_parameters = {
-        "size": 30,
-        "V0": 1
-    }
-    # Define iteration parameters ('max_iterations' is optional):
-    iteration_parameters = {
-        "max_iterations": 1000000,
-        "tolerance": 1e-5
-    }
+    L = 100
 
-    # Initialise the grid
-    Potential_grid = initialise(grid_parameters)
-    
-    # Iterate over the grid until the error is below the tolerance
-    Potential_grid = iteration(Potential_grid, grid_parameters, iteration_parameters)
+    Potential_grid = build(L)
 
     # Plot the results
-    plot(Potential_grid, grid_parameters, plot_type='3D')
+    plot(Potential_grid, plot_type='3D')
+
+# ---------- Main for timing ---------- #
+def main_time():
+    """
+    Measures the time it takes to run the build function for different L.
+    
+    L=1 is used to precompile the code.
+    
+    Args:
+        L_list (list): A list of L values.
+    """
+    # Define grid parameters:
+    L_list = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+    # Precompile the code
+    build(1)
+
+    # Time the function
+    for L in L_list:
+        print(f'Time for L = {L} was: {time_function(lambda: build(L))} seconds.')
 
 # -------------------------- #
 
 if __name__ == "__main__":
     main()
+    main_time()

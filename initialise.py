@@ -6,7 +6,7 @@ This file contains the initialisation function, which initialises the potential 
 import numpy as np
 
 # ---------- Initialisation ---------- #
-def initialise_efficient(grid_parameters):
+def initialise_efficient(L):
     """
     Initialises the potential grid.
 
@@ -21,13 +21,8 @@ def initialise_efficient(grid_parameters):
         Square_grid (numpy.ndarray): The initialised square part of the potential grid.
         Diagonal_grid (numpy.ndarray): The initialised diagonal part of the potential grid.
     """
-
-    # Extract grid parameters
-    L = grid_parameters['size']
-    V0 = grid_parameters['V0']
-
     # Calculate the potential step
-    dV = V0 / L
+    dV = 1 / L
 
     # Initialise the potential grids
     Square_grid = np.zeros((L, L))
@@ -38,6 +33,6 @@ def initialise_efficient(grid_parameters):
         Square_grid[i, L-1] = i * dV
 
     # Update the diagonal grid
-    Diagonal_grid[0, L-1] = V0
+    Diagonal_grid[0, L-1] = 1
 
     return Square_grid, Diagonal_grid

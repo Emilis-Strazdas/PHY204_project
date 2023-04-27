@@ -24,35 +24,30 @@ from initialise import initialise_efficient
 from iteration import iteration_efficient
 from plot import plot_efficient
 from plot import plot_finished
+from construct import construct
 from time_function import time_function
+
 
 # ---------- Main ---------- #
 
 def main_efficient():
     # Define grid parameters:
-    grid_parameters = {
-        "size": 20,
-        "V0": 1,
-        "w": 0.5
-    }
+    L = 100
     # Define iteration parameters ('max_iterations' is optional):
-    iteration_parameters = {
-        "max_iterations": 1000,
-        "tolerance": 1e-5
-    }
+    tolerance = 1e-5
 
     # Compile half of the grid
-    Square_grid, Diagonal_grid = build(grid_parameters, iteration_parameters)
+    # Square_grid, Diagonal_grid = build(grid_parameters, iteration_parameters)
 
-    # Construct full grid
+    print(f'Without numba: {time_function(lambda: build(L, tolerance))}')
 
     # Plot the results
-    plot_finished(Square_grid, Diagonal_grid, grid_parameters, plot_type='3D')
+    # plot_finished(Square_grid, Diagonal_grid, grid_parameters, plot_type='3D')
 
-def build(grid_parameters, iteration_parameters):
-    Square_grid, Diagonal_grid = initialise_efficient(grid_parameters)
-    return iteration_efficient(Square_grid, Diagonal_grid, grid_parameters, iteration_parameters)
-
+def build(L, tolerance):
+    Square_grid, Diagonal_grid = initialise_efficient(L)
+    Square_grid, Diagonal_grid = iteration_efficient(Square_grid, Diagonal_grid, L, tolerance)
+    return construct(Square_grid, Diagonal_grid)
 # -------------------------- #
 
 if __name__ == "__main__":

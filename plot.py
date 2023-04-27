@@ -26,7 +26,7 @@ def plot_efficient(Square_grid, Diagonal_grid):
     ax2.imshow(Diagonal_grid, cmap='inferno')
     plt.show()    
 
-def plot_finished(Square_grid, Diagonal_grid, grid_parameters, plot_type='2D'):
+def plot_finished(Square_grid, Diagonal_grid, L, plot_type='2D'):
     """
     Plots the potential grid.
 
@@ -40,10 +40,6 @@ def plot_finished(Square_grid, Diagonal_grid, grid_parameters, plot_type='2D'):
         None
         
     """
-
-    # Extract the size of the grid
-    L = grid_parameters['size']
-
     # Combine the square and diagonal grids
     Potential_grid = np.zeros((2*L, 2*L))
 

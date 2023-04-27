@@ -5,9 +5,13 @@ step.
 
 # ---------- Imports ---------- #
 import numpy as np
+from numba import njit
 
 # ---------- Iteration Step ---------- #
-def iteration_step_efficient(Square_grid, Diagonal_grid, grid_parameters):
+
+# Using Numba to compile the function for faster execution
+@njit
+def iteration_step_efficient(Square_grid, Diagonal_grid, L):
     """
     Performs one iteration step.
     
@@ -20,9 +24,6 @@ def iteration_step_efficient(Square_grid, Diagonal_grid, grid_parameters):
         Potential_grid_new (numpy.ndarray): The updated Square_grid grid.
         Diagonal_grid_new (numpy.ndarray): The updated Diagonal_grid grid.
     """
-
-    # Get the size of the grid
-    L = grid_parameters['size']
 
     # Initialise the new potential grid
     Square_grid_new = np.copy(Square_grid)

@@ -9,7 +9,7 @@ from iteration_step import iteration_step_efficient
 
 # ---------- Iteration ---------- #
 
-def iteration_efficient(Square_grid, Diagonal_grid, grid_parameters, iteration_parameters):
+def iteration_efficient(Square_grid, Diagonal_grid, L, tolerance):
     """
     Iterates the potential grid until the error is below a certain tolerance.
 
@@ -29,15 +29,14 @@ def iteration_efficient(Square_grid, Diagonal_grid, grid_parameters, iteration_p
     """
 
     # Extracting the iteration parameters
-    max_iter = iteration_parameters['max_iterations']
-    tolerance = iteration_parameters['tolerance']
+    max_iter = 100000000
 
     # Iterating the potential grid
     while max_iter > 0:
         # Counting the number of iterations
         max_iter -= 1
         # Performing one iteration step
-        Square_grid_new, Diagonal_grid_new = iteration_step_efficient(Square_grid, Diagonal_grid, grid_parameters)
+        Square_grid_new, Diagonal_grid_new = iteration_step_efficient(Square_grid, Diagonal_grid, L)
         # Calculating the error
         if np.max(Square_grid_new - Square_grid) < tolerance:
             break

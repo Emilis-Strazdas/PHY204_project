@@ -1,5 +1,6 @@
 """
-
+This file contains the time_function function, which times the execution of a
+function.
 """
 
 # ---------- Imports ---------- #

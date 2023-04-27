@@ -15,7 +15,7 @@ def initialise_efficient(L):
     to the centre of the grid.
 
     Args:
-        grid_parameters (dict): A dictionary containing the grid parameters.
+        L (int): The number of grid points in one direction.
 
     Returns:
         Square_grid (numpy.ndarray): The initialised square part of the potential grid.

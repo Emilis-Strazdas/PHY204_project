@@ -1,4 +1,6 @@
 """
+This file contains the function that constructs the full potential grid from the
+square and diagonal parts.
 """
 
 # ---------- Imports ----------#
@@ -8,6 +10,16 @@ from matrix_operations import complete_anti_diagonal_symmetric
 
 # ---------- Construct ----------#
 def construct(Square_grid, Diagonal_grid):
+    """
+    Constructs the full potential grid from the square and diagonal parts.
+    
+    Args:
+        Square_grid (numpy.ndarray): The square part of the potential grid.
+        Diagonal_grid (numpy.ndarray): The diagonal part of the potential grid.
+        
+    Returns:
+        Potential_grid (numpy.ndarray): The full potential grid.
+    """
     # Extract the size of the grid
     L = len(Square_grid)
 

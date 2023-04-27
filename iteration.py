@@ -11,7 +11,7 @@ from iteration_step import iteration_step_efficient
 
 # ---------- Iteration ---------- #
 
-def iteration_efficient(Square_grid, Diagonal_grid, L, tolerance):
+def iteration_efficient(Square_grid, Diagonal_grid, L):
     """
     Iterates the potential grid until the error is below a certain tolerance.
 
@@ -31,7 +31,7 @@ def iteration_efficient(Square_grid, Diagonal_grid, L, tolerance):
     """
 
     # Extracting the iteration parameters
-    max_iter = 10000
+    max_iter = 100000   # precaution, never reached
 
     # Iterating the potential grid
     while max_iter > 0:
@@ -40,9 +40,12 @@ def iteration_efficient(Square_grid, Diagonal_grid, L, tolerance):
         # Performing one iteration step
         Square_grid_new, Diagonal_grid_new = iteration_step_efficient(Square_grid, Diagonal_grid, L)
         # Calculating the error
-        if np.max(Square_grid_new - Square_grid) < tolerance:
+        if np.max(Square_grid_new - Square_grid) < 1e-5:
             break
         # Updating the potential grid
         Square_grid, Diagonal_grid = Square_grid_new, Diagonal_grid_new
+
+    if max_iter == 0:
+        print("Warning: max_iter reached.")
 
     return Square_grid_new, Diagonal_grid_new

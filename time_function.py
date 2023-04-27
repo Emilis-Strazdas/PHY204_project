@@ -1,5 +1,11 @@
+"""
+
+"""
+
+# ---------- Imports ---------- #
 import time
 
+# ---------- Timing function ---------- #
 def time_function(f):
     """
     Times the execution of a function.

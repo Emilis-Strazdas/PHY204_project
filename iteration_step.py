@@ -8,7 +8,6 @@ import numpy as np
 from numba import njit
 
 # ---------- Iteration Step ---------- #
-
 # Using Numba to compile the function for faster execution
 @njit
 def iteration_step_efficient(Square_grid, Diagonal_grid, L):

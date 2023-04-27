@@ -29,9 +29,11 @@ def iteration_step_efficient(Square_grid, Diagonal_grid, L):
     Diagonal_grid_new = np.copy(Diagonal_grid)
     
     # Update the square part
-    for i in range(1, L-1):
-        for j in range(L-2, 0, -1):
-            Square_grid_new[i, j]     = (Square_grid[i+1, j]     + Square_grid[i-1, j]   + Square_grid[i, j+1]   + Square_grid[i, j-1]) * 0.25
+    # for i in range(1, L-1):
+    #     for j in range(L-2, 0, -1):
+    #         Square_grid_new[i, j]     = (Square_grid[i+1, j]     + Square_grid[i-1, j]   + Square_grid[i, j+1]   + Square_grid[i, j-1]) * 0.25
+
+    Square_grid_new[1:L-1, L-2:0:-1] = (Square_grid[2:L, L-2:0:-1] + Square_grid[0:L-2, L-2:0:-1] + Square_grid[1:L-1, L-1:1:-1] + Square_grid[1:L-1, L-3:-1:-1]) * 0.25
     # Update the boundary of the square part
     for j in range(L-2, 0, -1):
             Square_grid_new[L-1, j]   = (Square_grid[L-2, j]     + Diagonal_grid[0, j]   + Square_grid[L-1, j-1] + Square_grid[L-1, j+1]) * 0.25

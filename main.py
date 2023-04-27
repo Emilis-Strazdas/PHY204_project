@@ -27,7 +27,7 @@ def main():
     Plots the potential grid for a given L.
     """
     # Define grid parameters:
-    L = 100
+    L = 10
 
     Potential_grid = build(L)
 
@@ -57,5 +57,5 @@ def main_time():
 # -------------------------- #
 
 if __name__ == "__main__":
-    main()
+    # main()
     main_time()

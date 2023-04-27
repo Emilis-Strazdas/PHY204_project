@@ -6,11 +6,8 @@ until the error is below a certain tolerance.
 # ---------- Imports ---------- #
 import numpy as np
 from iteration_step import iteration_step_efficient
-# from iteration_step_gpt import iteration_step_efficient
-
 
 # ---------- Iteration ---------- #
-
 def iteration_efficient(Square_grid, Diagonal_grid, L):
     """
     Iterates the potential grid until the error is below a certain tolerance.

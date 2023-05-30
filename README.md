@@ -9,3 +9,5 @@
 There is also plot.py for plotting the function in either 2D or 3D, but has nothing to do with calculating the grid.
 
 The code has been written by **Emilis Strazdas** and **Leopold Rousseau**.
+
+Edit: Awarded as the fastest algorithm written in Python in the whole promotion.
